@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.Bloom" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <fragment
+            android:name = ".BloomFragment"
+            android:label = "BlooMSection">
+        </fragment>
+        <fragment
+            android:name = ".FavFragment"
+            android:label = "Favorite"></fragment>
+        <fragment
+            android:name = ".MainPageFragment"
+            android:label = "Main Page"></fragment>
+        <fragment
+            android:name = ".MyPageFragment"
+            android:label = "My Page"></fragment>
+        <fragment
+            android:name = "SettingFragment"
+            android:label = "Setting"></fragment>
+    </application>
+
+</manifest>
