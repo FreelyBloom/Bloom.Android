@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// 메인 화면
 public class MainPageFragment extends Fragment {
 
     public static Fragment newInstance(Context context) {

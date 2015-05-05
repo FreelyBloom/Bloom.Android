@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// 환경설정 페이지
+
 public class SettingFragment extends Fragment {
 
     public static Fragment newInstance(Context context) {

@@ -13,18 +13,28 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/*
+메인 액티비티
+로그인 여부 확인해야함 ( if-else using SharedPreferences )
+if "first-time-user" OR Log-out : load Log-In page
+else : load to main page (stay logged-in unless User hit log-out bttn)
+ */
 public class MainActivity extends FragmentActivity {
     private DrawerLayout drawer;
     private ListView navList;
 
-    private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};
+    private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
+
+    // 프래그먼트 리스트
     private String[] fragments ={
             "com.Bloom.MainPageFragment",
             "com.Bloom.MyPageFragment",
             "com.Bloom.FavFragment",
             "com.Bloom.BloomFragment",
             "com.Bloom.SettingFragment"};
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,8 @@ public class MainActivity extends FragmentActivity {
         drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         navList = (ListView) findViewById(R.id.drawer);
         navList.setAdapter(adapter);
+
+        // 메뉴 클릭에 따른 표시되는 fragment 변경
         navList.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int pos,long id){

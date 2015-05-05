@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// 추천 동아리 페이지
 public class BloomFragment extends Fragment {
 
     public static Fragment newInstance(Context context) {
