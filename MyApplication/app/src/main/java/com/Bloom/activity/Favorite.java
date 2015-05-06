@@ -15,9 +15,7 @@ public class Favorite extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewGroup content = (ViewGroup) findViewById(R.id.favorite);
-        getLayoutInflater().inflate(R.layout.activity_main,content,true);
-
+        setContentView(R.layout.activity_favorite);
     }
 
 
