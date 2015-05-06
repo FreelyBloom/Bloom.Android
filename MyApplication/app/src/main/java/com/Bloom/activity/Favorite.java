@@ -1,5 +1,6 @@
 package com.Bloom.activity;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.Bloom.R;
 
-public class Favorite extends ActionBarActivity {
+public class Favorite extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

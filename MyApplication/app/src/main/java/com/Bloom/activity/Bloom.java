@@ -1,13 +1,16 @@
 package com.Bloom.activity;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.Bloom.MainActivity;
 import com.Bloom.R;
 
-public class Bloom extends ActionBarActivity {
+public class Bloom extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class Bloom extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_bloom, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

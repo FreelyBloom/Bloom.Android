@@ -1,67 +1,46 @@
 package com.Bloom.activity;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.Bloom.R;
+import com.Bloom.adapter.ViewPagerAdapter;
 
-public class myPage extends ActionBarActivity {
 
+public class myPage extends FragmentActivity {
+    private ViewPager _mViewPager;
+    private ViewPagerAdapter _adapter;
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        setUpView();
+        setTab();
+    }
+    private void setUpView(){
+        _mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        _adapter = new ViewPagerAdapter(getApplicationContext(),getSupportFragmentManager());
+        _mViewPager.setAdapter(_adapter);
+        _mViewPager.setCurrentItem(0);
+    }
+    private void setTab(){
+        _mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
+
+            @Override
+            public void onPageScrollStateChanged(int position) {}
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {}
+            @Override
+            public void onPageSelected(int position) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_my_page, container, false);
-            return rootView;
-        }
-    }
 }

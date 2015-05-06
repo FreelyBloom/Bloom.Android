@@ -50,29 +50,7 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void onDrawerClosed(View drawerView){
                         super.onDrawerClosed(drawerView);
-                        switch(pos){
-                            case 0:
-                                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-                                trans.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.Bloom.mainPage"));
-                                trans.commit();
-                                break;
-                            case 1:
-                                Intent myPage = new Intent(MainActivity.this,myPage.class);
-                                startActivity(myPage);
-                                break;
-                            case 2:
-                                Intent favor = new Intent(MainActivity.this, Favorite.class);
-                                startActivity(favor);
-                                break;
-                            case 3:
-                                Intent bloom = new Intent(MainActivity.this, Bloom.class);
-                                startActivity(bloom);
-                                break;
-                            case 4:
-                                Intent setting = new Intent(MainActivity.this, Setting.class);
-                                startActivity(setting);
-                                break;
-                        }
+                        switchFragment(pos);
                     }
                 });
 
@@ -82,6 +60,32 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
         trans.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.Bloom.mainPage"));
         trans.commit();
+    }
+
+    private void switchFragment(int pos){
+        switch(pos) {
+            case 0:
+                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                trans.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.Bloom.mainPage"));
+                trans.commit();
+                break;
+            case 1:
+                Intent myPage = new Intent(MainActivity.this, myPage.class);
+                startActivity(myPage);
+                break;
+            case 2:
+                Intent favor = new Intent(MainActivity.this, Favorite.class);
+                startActivity(favor);
+                break;
+            case 3:
+                Intent bloom = new Intent(MainActivity.this, Bloom.class);
+                startActivity(bloom);
+                break;
+            case 4:
+                Intent setting = new Intent(MainActivity.this, Setting.class);
+                startActivity(setting);
+                break;
+        }
     }
 
 
