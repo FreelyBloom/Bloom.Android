@@ -1,6 +1,7 @@
 package com.Bloom;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.Bloom.activity.*;
 
 /*
 메인 액티비티
@@ -26,12 +28,6 @@ public class MainActivity extends FragmentActivity {
     private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
 
     // 프래그먼트 리스트
-    private String[] fragments ={
-            "com.Bloom.MainPageFragment",
-            "com.Bloom.MyPageFragment",
-            "com.Bloom.FavFragment",
-            "com.Bloom.BloomFragment",
-            "com.Bloom.SettingFragment"};
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 
@@ -43,7 +39,7 @@ public class MainActivity extends FragmentActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
 
         drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navList = (ListView) findViewById(R.id.drawer);
+        navList = (ListView) findViewById(R.id.drawerList);
         navList.setAdapter(adapter);
 
         // 메뉴 클릭에 따른 표시되는 fragment 변경
@@ -54,17 +50,38 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void onDrawerClosed(View drawerView){
                         super.onDrawerClosed(drawerView);
-                        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-                        tx.replace(R.id.main, Fragment.instantiate(MainActivity.this, fragments[pos]));
-                        tx.commit();
+                        switch(pos){
+                            case 0:
+                                FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                                trans.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.Bloom.mainPage"));
+                                trans.commit();
+                                break;
+                            case 1:
+                                Intent myPage = new Intent(MainActivity.this,myPage.class);
+                                startActivity(myPage);
+                                break;
+                            case 2:
+                                Intent favor = new Intent(MainActivity.this, Favorite.class);
+                                startActivity(favor);
+                                break;
+                            case 3:
+                                Intent bloom = new Intent(MainActivity.this, Bloom.class);
+                                startActivity(bloom);
+                                break;
+                            case 4:
+                                Intent setting = new Intent(MainActivity.this, Setting.class);
+                                startActivity(setting);
+                                break;
+                        }
                     }
                 });
+
                 drawer.closeDrawer(navList);
             }
         });
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.main,Fragment.instantiate(MainActivity.this, fragments[0]));
-        tx.commit();
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        trans.replace(R.id.main, Fragment.instantiate(MainActivity.this, "com.Bloom.mainPage"));
+        trans.commit();
     }
 
 

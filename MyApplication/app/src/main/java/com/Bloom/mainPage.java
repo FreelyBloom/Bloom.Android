@@ -1,5 +1,6 @@
 package com.Bloom;
 
+
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,18 +15,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FavFragment extends Fragment {
+public class mainPage extends Fragment {
 
     public static Fragment newInstance(Context context) {
-        FavFragment favFragment = new FavFragment();
 
-        return favFragment;
+        mainPage mainFragment = new mainPage();
+
+        return mainFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_fav, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_main_page, null);
         return root;
     }
-
 }

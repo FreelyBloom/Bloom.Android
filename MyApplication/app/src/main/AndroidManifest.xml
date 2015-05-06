@@ -16,22 +16,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <fragment
-            android:name = ".BloomFragment"
-            android:label = "BlooMSection">
+            android:name=".BloomFragment"
+            android:label="BlooMSection" >
         </fragment>
         <fragment
-            android:name = ".FavFragment"
-            android:label = "Favorite"></fragment>
+            android:name=".FavFragment"
+            android:label="Favorite" />
         <fragment
-            android:name = ".MainPageFragment"
-            android:label = "Main Page"></fragment>
+            android:name=".MainPageFragment"
+            android:label="Main Page" />
         <fragment
-            android:name = ".MyPageFragment"
-            android:label = "My Page"></fragment>
+            android:name=".MyPageFragment"
+            android:label="My Page" />
         <fragment
-            android:name = "SettingFragment"
-            android:label = "Setting"></fragment>
+            android:name="SettingFragment"
+            android:label="Setting" />
+
+        <activity
+            android:name=".activity.MainPage"
+            android:label="@string/title_activity_main_page" >
+        </activity>
+        <activity
+            android:name=".activity.myPage"
+            android:label="@string/title_activity_my_page" >
+        </activity>
+        <activity
+            android:name=".activity.Favorite"
+            android:label="@string/title_activity_favorite" >
+        </activity>
+        <activity
+            android:name=".activity.Bloom"
+            android:label="@string/title_activity_bloom" >
+        </activity>
+        <activity
+            android:name=".activity.Setting"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>
