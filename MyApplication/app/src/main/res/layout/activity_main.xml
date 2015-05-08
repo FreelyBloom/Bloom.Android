@@ -10,6 +10,17 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="NickName"
+            android:id="@+id/textView"
+            android:layout_gravity="center|top"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:outlineProvider="bounds" />
     </FrameLayout>
 
     <ListView

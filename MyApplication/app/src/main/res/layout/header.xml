@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/relative">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/profile_image"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/profile" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:id="@+id/textView1"
+            android:text="닉네임"
+            android:textColor = "@color/black"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/profile_image"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+</FrameLayout>
