@@ -3,8 +3,10 @@ package com.Bloom;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import com.Bloom.activity.*;
 
+
 /*
 메인 액티비티
 로그인 여부 확인해야함 ( if-else using SharedPreferences )
@@ -30,8 +33,6 @@ public class MainActivity extends FragmentActivity {
     private DrawerLayout drawer;
     private ListView navList;
     private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
-    // private ActionBarDrawerToggle actionBar;
-    // 프래그먼트 리스트
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 
@@ -39,7 +40,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        logInCheck();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
 
         drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -100,6 +101,16 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    // 유저 로그인 여부 체크 method
+    private void logInCheck(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean logIn = sharedPref.getBoolean("LogIn", false);
+        if(!logIn){
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+        }
+    }
+    // MainActivity 안의 mainPage fragment
     public static class mainPage extends Fragment {
 
         public static Fragment newInstance(Context context) {

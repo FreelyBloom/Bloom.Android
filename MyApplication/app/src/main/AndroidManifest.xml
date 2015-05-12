@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.Bloom" >
 
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+ To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
+     option is required to comply with the Google+ Sign-In developer policies
+    -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To retrieve the account name (email) as part of sign-in: -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,26 +29,10 @@
         </activity>
 
         <fragment
-            android:name=".BloomFragment"
-            android:label="BlooMSection" >
-        </fragment>
-        <fragment
-            android:name=".FavFragment"
-            android:label="Favorite" />
-        <fragment
-            android:name=".MainPageFragment"
-            android:label="Main Page" />
-        <fragment
-            android:name=".MyPageFragment"
-            android:label="My Page" />
-        <fragment
-            android:name="SettingFragment"
-            android:label="Setting" />
-
-        <activity
-            android:name=".activity.MainPage"
+            android:name=".mainPage"
             android:label="@string/title_activity_main_page" >
-        </activity>
+        </fragment>
+
         <activity
             android:name=".activity.myPage"
             android:label="@string/title_activity_my_page" >
@@ -53,6 +48,24 @@
         <activity
             android:name=".activity.Setting"
             android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activity.registration"
+            android:label="@string/title_activity_registration" >
+        </activity>
+        <activity
+            android:name=".activity.Login"
+            android:label="@string/title_activity_login" >
         </activity>
     </application>
 
