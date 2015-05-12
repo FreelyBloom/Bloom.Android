@@ -3,11 +3,13 @@ package com.Bloom.activity;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.Bloom.R;
 import com.Bloom.util.httpClient;
@@ -71,34 +73,37 @@ public class Login extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        String result = "";
+        String result;
         RequestParams params = new RequestParams();
+
         try {
             result = toJson();
-            params.put("JSONData", result);
-            httpClient.post("/login",params,new JsonHttpResponseHandler(){
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response){
-                    String result = response.toString();
-                    System.out.println(result);
-                }
-                @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    super.onFailure(statusCode, headers, responseString, throwable);
-                }
-            });
-            httpClient.get("/login", params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+        params.put("JSONData", result);
+        httpClient.post("/login",params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                String result = response.toString();
+                System.out.println(result);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers,
+                                  Throwable throwable, JSONObject errorResponse) {
+                Log.i("Login", "LoginFailed");
+            }
 
-                }
+        });
+        httpClient.get("/login", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println(response.toString());
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+                Log.i("Login", "LoginFailed");
+                System.out.println(responseString);
+            }
 
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                }
-
-            });
+        });
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -108,13 +113,11 @@ public class Login extends Activity implements View.OnClickListener {
     public String toJson() throws JSONException {
         personInfo person = new personInfo();
         person.setEmail(email.getText().toString());
-        person.setPw(email.getText().toString());
-        String json = "";
+        person.setPw(password.getText().toString());
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("user_id", person.getEmail());
         jsonObject.accumulate("user_pw",person.getPw());
-        json = jsonObject.toString();
-        return json;
+        return jsonObject.toString();
     }
 
 
