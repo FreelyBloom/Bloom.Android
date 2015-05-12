@@ -13,9 +13,9 @@ public class httpClient {
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static AsyncHttpClient getInstance() {
+        client.setURLEncodingEnabled(false);
         return httpClient.client;
     }
-
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.post(getAbsoluteUrl(url), params, responseHandler);

@@ -1,6 +1,7 @@
 package com.Bloom.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,10 +41,19 @@ public class Login extends Activity implements View.OnClickListener {
         password = (EditText) findViewById(R.id.pw);
         join = (Button) findViewById(R.id.joinBttn);
         signUp = (Button) findViewById(R.id.signupBttn);
-        join.setOnClickListener(this);
+
         AsyncHttpClient client = httpClient.getInstance();
         PersistentCookieStore myCookie = new PersistentCookieStore(this);
         client.setCookieStore(myCookie);
+
+        join.setOnClickListener(this);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this,Registration.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -74,37 +84,35 @@ public class Login extends Activity implements View.OnClickListener {
     public void onClick(View v) {
 
         String result;
-        RequestParams params = new RequestParams();
-
         try {
             result = toJson();
-        params.put("JSONData", result);
-        httpClient.post("/login",params, new JsonHttpResponseHandler(){
+            RequestParams params = new RequestParams("JSONData", result);
+        httpClient.post("/signin",params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 String result = response.toString();
                 System.out.println(result);
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers,
-                                  Throwable throwable, JSONObject errorResponse) {
-                Log.i("Login", "LoginFailed");
+            public void onFailure(int statusCode, Header[] headers,String response,
+                                  Throwable throwable) {
+                Log.i("SigninPost", "SigninFailed");
             }
 
         });
-        httpClient.get("/login", params, new JsonHttpResponseHandler() {
+       httpClient.get("/signin", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 System.out.println(response.toString());
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
-                Log.i("Login", "LoginFailed");
-                System.out.println(responseString);
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject) {
+                Log.i("SigninGet", "SigninFailed");
+
             }
 
         });
-        } catch (JSONException e) {
+        }catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -115,8 +123,8 @@ public class Login extends Activity implements View.OnClickListener {
         person.setEmail(email.getText().toString());
         person.setPw(password.getText().toString());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.accumulate("user_id", person.getEmail());
-        jsonObject.accumulate("user_pw",person.getPw());
+        jsonObject.put("user_name", person.getEmail());
+        jsonObject.put("user_",person.getPw());
         return jsonObject.toString();
     }
 
