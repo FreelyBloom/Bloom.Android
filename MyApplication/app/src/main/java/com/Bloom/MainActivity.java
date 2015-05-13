@@ -111,6 +111,14 @@ public class MainActivity extends FragmentActivity {
         }
     }
     // MainActivity 안의 mainPage fragment
+
+    public void onPause(){
+        super.onPause();
+    }
+
+    public void onResume(){
+        super.onResume();
+    }
     public static class mainPage extends Fragment {
 
         public static Fragment newInstance(Context context) {
@@ -126,4 +134,5 @@ public class MainActivity extends FragmentActivity {
             return root;
         }
     }
+
 }

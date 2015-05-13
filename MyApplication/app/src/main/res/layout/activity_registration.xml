@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.Bloom.activity.Registration">
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom= "20dp"
+    tools:context="com.Bloom.activity.Registration"
+    android:gravity="center">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -92,10 +97,19 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:id="@+id/interest1"
+                android:id=
+                    "@+id/interest1"
                 android:src="@drawable/interest"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signUP"
+                android:text="Sign UP"
+                android:textSize="20sp"
+                android:layout_gravity="right" />
             </LinearLayout>
 
         </LinearLayout>

@@ -22,6 +22,7 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -87,31 +88,19 @@ public class Login extends Activity implements View.OnClickListener {
         try {
             result = toJson();
             RequestParams params = new RequestParams("JSONData", result);
-        httpClient.post("/signin",params, new JsonHttpResponseHandler(){
+        httpClient.post("/login",params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 String result = response.toString();
                 System.out.println(result);
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers,String response,
-                                  Throwable throwable) {
-                Log.i("SigninPost", "SigninFailed");
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse){
+                System.out.println("Error : " + errorResponse.toString());
             }
 
         });
-       httpClient.get("/signin", params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println(response.toString());
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject) {
-                Log.i("SigninGet", "SigninFailed");
 
-            }
-
-        });
         }catch (JSONException e) {
             e.printStackTrace();
         }
@@ -124,7 +113,7 @@ public class Login extends Activity implements View.OnClickListener {
         person.setPw(password.getText().toString());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("user_name", person.getEmail());
-        jsonObject.put("user_",person.getPw());
+        jsonObject.put("user_pw",person.getPw());
         return jsonObject.toString();
     }
 
