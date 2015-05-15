@@ -1,6 +1,7 @@
 package com.Bloom.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,11 +23,18 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 public class Login extends Activity implements View.OnClickListener {
 
@@ -44,6 +52,7 @@ public class Login extends Activity implements View.OnClickListener {
         signUp = (Button) findViewById(R.id.signupBttn);
 
         AsyncHttpClient client = httpClient.getInstance();
+        client.setURLEncodingEnabled(false);
         PersistentCookieStore myCookie = new PersistentCookieStore(this);
         client.setCookieStore(myCookie);
 
@@ -87,21 +96,37 @@ public class Login extends Activity implements View.OnClickListener {
         String result;
         try {
             result = toJson();
-            RequestParams params = new RequestParams("JSONData", result);
-        httpClient.post("/login",params, new JsonHttpResponseHandler(){
+            Header[] headers = null;
+            RequestParams params = new RequestParams();
+            params.add("JSONData", result);
+
+            httpClient.post("/login", params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 String result = response.toString();
                 System.out.println(result);
             }
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse){
-                System.out.println("Error : " + errorResponse.toString());
-            }
-
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+                System.out.println("Response is : " + response);
+                }
         });
-
-        }catch (JSONException e) {
+            httpClient.get("/login", params, new JsonHttpResponseHandler(){
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    String result = response.toString();
+                    System.out.println(result);
+                }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject jsonObject) {
+                    Log.i("SignUpGet", "SignUpFailed");
+                }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+                    System.out.println("Response is : " + response);
+                }
+            });
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

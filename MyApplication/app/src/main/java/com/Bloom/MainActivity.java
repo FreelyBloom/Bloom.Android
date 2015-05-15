@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
     private DrawerLayout drawer;
     private ListView navList;
     private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
-
+    private ImageView profile;
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 
     @Override
@@ -46,7 +46,17 @@ public class MainActivity extends FragmentActivity {
         drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         navList = (ListView) findViewById(R.id.drawerList);
         View header = getLayoutInflater().inflate(R.layout.header,null);
-        ImageView profile = (ImageView) header.findViewById(R.id.profile_image);
+        profile = (ImageView) header.findViewById(R.id.profile_image);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent.createChooser(intent, "Select an Image"), 1);
+
+            }
+        });
         navList.addHeaderView(header);
         navList.setAdapter(adapter);
 
@@ -118,6 +128,14 @@ public class MainActivity extends FragmentActivity {
 
     public void onResume(){
         super.onResume();
+    }
+
+    public void onActivityResult(int reqCode, int resCode, Intent data){
+        if(resCode == RESULT_OK){
+            if (reqCode == 1){
+                profile.setImageURI(data.getData());
+            }
+        }
     }
     public static class mainPage extends Fragment {
 

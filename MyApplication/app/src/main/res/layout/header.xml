@@ -16,7 +16,8 @@
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:gravity="center_vertical"
-            android:background="@drawable/profile" />
+            android:clickable="true"
+            android:src="@drawable/profile" />
 
         <TextView
             android:layout_width="match_parent"
