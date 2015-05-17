@@ -28,6 +28,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,14 +95,14 @@ public class Login extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        StringEntity entity;
         String result;
         try {
             result = toJson();
-            Header[] headers = null;
-            RequestParams params = new RequestParams();
-            params.add("JSONData", result);
+            entity = new StringEntity(result);
+            entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json"));
 
-            httpClient.post("/login", params, new JsonHttpResponseHandler(){
+            httpClient.post(getApplicationContext(),"/login",entity,"application/json", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 String result = response.toString();
@@ -111,7 +113,7 @@ public class Login extends Activity implements View.OnClickListener {
                 System.out.println("Response is : " + response);
                 }
         });
-            httpClient.get("/login", params, new JsonHttpResponseHandler(){
+           /* httpClient.get("/login", params, new JsonHttpResponseHandler(){
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     String result = response.toString();
@@ -126,7 +128,10 @@ public class Login extends Activity implements View.OnClickListener {
                     System.out.println("Response is : " + response);
                 }
             });
+            */
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
@@ -137,8 +142,8 @@ public class Login extends Activity implements View.OnClickListener {
         person.setEmail(email.getText().toString());
         person.setPw(password.getText().toString());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("user_name", person.getEmail());
-        jsonObject.put("user_pw",person.getPw());
+        jsonObject.accumulate("user_id", person.getEmail());
+        jsonObject.accumulate("user_pw",person.getPw());
         return jsonObject.toString();
     }
 

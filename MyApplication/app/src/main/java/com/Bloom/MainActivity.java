@@ -4,6 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -34,6 +37,8 @@ public class MainActivity extends FragmentActivity {
     private ListView navList;
     private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
     private ImageView profile;
+    private RoundImage roundedImage;
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 
     @Override
@@ -47,6 +52,9 @@ public class MainActivity extends FragmentActivity {
         navList = (ListView) findViewById(R.id.drawerList);
         View header = getLayoutInflater().inflate(R.layout.header,null);
         profile = (ImageView) header.findViewById(R.id.profile_image);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.profile);
+        roundedImage = new RoundImage(bm);
+        profile.setImageDrawable(roundedImage);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +145,7 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
+
     public static class mainPage extends Fragment {
 
         public static Fragment newInstance(Context context) {

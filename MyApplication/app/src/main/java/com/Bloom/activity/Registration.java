@@ -25,6 +25,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,13 +86,14 @@ public class Registration extends Activity implements View.OnClickListener {
     //사인업 버튼 클릭 시
     @Override
     public void onClick(View v) {
+        StringEntity entity;
         String result;
         try {
             result = toJson();
-            RequestParams params = new RequestParams();
-            params.put("JSONData", result);
+            entity = new StringEntity(result);
+            //entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-            httpClient.post("/signin", params, new JsonHttpResponseHandler(){
+            httpClient.post(null,"/signin",entity,"application/json", new JsonHttpResponseHandler(){
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                     String result = response.toString();
@@ -101,7 +104,7 @@ public class Registration extends Activity implements View.OnClickListener {
                     System.out.println("Response is : " + response);
                 }
             });
-            httpClient.get("/signin", params, new JsonHttpResponseHandler(){
+           /* httpClient.get("/signin", params, new JsonHttpResponseHandler(){
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     String result = response.toString();
@@ -116,8 +119,11 @@ public class Registration extends Activity implements View.OnClickListener {
                     System.out.println("Response is : " + response);
                 }
             });
+            */
 
         }catch (JSONException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
