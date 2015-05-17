@@ -86,14 +86,14 @@ public class Registration extends Activity implements View.OnClickListener {
     //사인업 버튼 클릭 시
     @Override
     public void onClick(View v) {
-        StringEntity entity;
+        RequestParams params;
         String result;
         try {
             result = toJson();
-            entity = new StringEntity(result);
+            params = new RequestParams("JSONData", result);
             //entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-            httpClient.post(null,"/signin",entity,"application/json", new JsonHttpResponseHandler(){
+            httpClient.post("/signup",params, new JsonHttpResponseHandler(){
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                     String result = response.toString();
@@ -123,8 +123,6 @@ public class Registration extends Activity implements View.OnClickListener {
 
         }catch (JSONException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
     }
 
@@ -145,7 +143,7 @@ public class Registration extends Activity implements View.OnClickListener {
         jsonObject.put("user_name", person.getFullName());
         jsonObject.put("user_pw",person.getCollege());
         jsonObject.put("user_id",person.getNickName());
-        jsonObject.put("user_num", uuid);
+        jsonObject.put("user_num", "304958372038475");
         return jsonObject.toString();
     }
 

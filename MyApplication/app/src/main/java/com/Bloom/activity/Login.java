@@ -95,14 +95,14 @@ public class Login extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        StringEntity entity;
         String result;
+        RequestParams params;
         try {
             result = toJson();
-            entity = new StringEntity(result);
-            entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json"));
+            params = new RequestParams("JSONData", result);
+            params.setContentEncoding("UTF-8");
 
-            httpClient.post(getApplicationContext(),"/login",entity,"application/json", new JsonHttpResponseHandler(){
+            httpClient.post("/login",params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 String result = response.toString();
@@ -131,8 +131,6 @@ public class Login extends Activity implements View.OnClickListener {
             */
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
 
     }
@@ -143,7 +141,7 @@ public class Login extends Activity implements View.OnClickListener {
         person.setPw(password.getText().toString());
         JSONObject jsonObject = new JSONObject();
         jsonObject.accumulate("user_id", person.getEmail());
-        jsonObject.accumulate("user_pw",person.getPw());
+        jsonObject.accumulate("user_pw", person.getPw());
         return jsonObject.toString();
     }
 
