@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,7 +13,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,7 @@ else : load to main page (stay logged-in unless User hit log-out bttn)
 public class MainActivity extends FragmentActivity {
     private DrawerLayout drawer;
     private ListView navList;
-    private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting"};  // 메뉴리스트
+    private String[] data = {"Main","My Page","Favorite", "BLooM", "Setting", "TEST"};  // 메뉴리스트
     private ImageView profile;
     private RoundImage roundedImage;
 
@@ -47,7 +47,6 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         logInCheck();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
-
         drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         navList = (ListView) findViewById(R.id.drawerList);
         View header = getLayoutInflater().inflate(R.layout.header,null);
@@ -97,24 +96,30 @@ public class MainActivity extends FragmentActivity {
             case 1:
                 Fragment mainFragment = new mainPage();
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+                trans.setCustomAnimations(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 trans.replace(R.id.main, mainFragment);
                 trans.commit();
                 break;
             case 2:
                 Intent myPage = new Intent(MainActivity.this, myPage.class);
+                myPage.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(myPage);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case 3:
                 Intent favor = new Intent(MainActivity.this, Favorite.class);
                 startActivity(favor);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case 4:
                 Intent bloom = new Intent(MainActivity.this, Bloom.class);
                 startActivity(bloom);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case 5:
                 Intent setting = new Intent(MainActivity.this, Setting.class);
                 startActivity(setting);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }
@@ -146,20 +151,5 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public static class mainPage extends Fragment {
-
-        public static Fragment newInstance(Context context) {
-
-            mainPage mainFragment = new mainPage();
-
-            return mainFragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-            ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_main_page, null);
-            return root;
-        }
-    }
 
 }

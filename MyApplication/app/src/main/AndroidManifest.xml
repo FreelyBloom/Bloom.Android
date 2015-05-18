@@ -56,6 +56,11 @@
             android:label="@string/title_activity_registration"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"  >
         </activity>
+        <fragment
+            android:name = ".Test"
+            android:theme = "@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+
+            </fragment>
     </application>
 
 </manifest>
