@@ -1,42 +1,25 @@
 package com.Bloom.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.Bloom.R;
 import com.Bloom.util.httpClient;
-
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 public class Login extends Activity implements View.OnClickListener {
 
@@ -47,11 +30,18 @@ public class Login extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/BloomFont.ttf");
 
         email = (EditText) findViewById(R.id.email);
+        email.setTypeface(font);
         password = (EditText) findViewById(R.id.pw);
+        password.setTypeface(font);
         join = (Button) findViewById(R.id.joinBttn);
+        join.setTypeface(font);
         signUp = (Button) findViewById(R.id.signupBttn);
+        signUp.setTypeface(font);
+
+
 
         AsyncHttpClient client = httpClient.getInstance();
         client.setURLEncodingEnabled(false);

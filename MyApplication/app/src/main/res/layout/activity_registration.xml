@@ -109,7 +109,9 @@
                 android:id="@+id/signUP"
                 android:text="Sign UP"
                 android:textSize="20sp"
-                android:layout_gravity="right" />
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                />
             </LinearLayout>
 
         </LinearLayout>

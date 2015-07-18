@@ -38,7 +38,7 @@
             android:textSize="20sp"/>
         <EditText
             android:id="@+id/email"
-            android:layout_width="343dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="20sp"
@@ -61,7 +61,9 @@
             android:text="JOIN"
             android:layout_gravity="center_horizontal"
             android:textSize="20sp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            />
 
         <Button
             android:id="@+id/signupBttn"
@@ -70,7 +72,8 @@
             android:text="Sign Up"
             android:textSize="20sp"
             android:gravity="right"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </RelativeLayout>
