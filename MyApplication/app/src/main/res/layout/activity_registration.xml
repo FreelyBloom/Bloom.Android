@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background"
     android:paddingTop="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -25,7 +25,8 @@
             android:src="@drawable/bloom"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <LinearLayout
@@ -35,31 +36,38 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=" Type your full Name "
-            android:drawableLeft="@drawable/icon"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/fullName"
-            android:gravity="center" />
+            android:layout_height="40dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint = " Type your Nickname"
-            android:drawableLeft="@drawable/icon"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:id="@+id/nickname"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:hint="Name "
+                android:drawableLeft="@drawable/icon"
+                android:textSize="20sp"
+                android:id="@+id/fullName"
+                android:gravity="center"
+
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Name :"
+                android:textSize="20sp"
+                android:id="@+id/textView4" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -67,7 +75,9 @@
                 android:clickable="true"
                 android:id="@+id/male"
                 android:layout_gravity="center"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_centerVertical="true" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -75,33 +85,61 @@
                 android:clickable="true"
                 android:id="@+id/female"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint = " Choose your College "
-            android:drawableLeft="@drawable/icon"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:id="@+id/college"/>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:id=
-                    "@+id/interest1"
-                android:src="@drawable/interest"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:hint = "College "
+                android:drawableLeft="@drawable/icon"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:id="@+id/college"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="College :"
+                android:textSize="20sp"
+                android:id="@+id/textView5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:hint = "Nickname"
+                android:drawableLeft="@drawable/icon"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:id="@+id/nickname"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="NickName :"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/textView6" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -111,10 +149,14 @@
                 android:textSize="20sp"
                 android:layout_gravity="right"
                 android:background="@android:color/transparent"
-                />
-            </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/nickname"
+                android:layout_alignEnd="@+id/nickname"
+                android:layout_marginRight="41dp"
+                android:layout_marginEnd="41dp" />
+        </RelativeLayout>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>
