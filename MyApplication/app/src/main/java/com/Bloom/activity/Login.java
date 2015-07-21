@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.Bloom.R;
 import com.Bloom.util.httpClient;
@@ -25,6 +26,7 @@ public class Login extends Activity implements View.OnClickListener {
 
     private EditText email, password;
     private Button join, signUp;
+    private TextView idText,pwText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class Login extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/BloomFont.ttf");
 
+        idText = (TextView) findViewById(R.id.textView2);
+        pwText = (TextView) findViewById(R.id.textView3);
+        idText.setTypeface(font);
+        pwText.setTypeface(font);
         email = (EditText) findViewById(R.id.email);
         email.setTypeface(font);
         password = (EditText) findViewById(R.id.pw);
@@ -54,6 +60,7 @@ public class Login extends Activity implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this,Registration.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.cycle_7);
             }
         });
 
